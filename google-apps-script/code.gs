@@ -1,35 +1,37 @@
-const SPREADSHEET_ID = '1IYsTHUnfOIHGcwQvoTcjOc5X2wKZJDIrqxqxXtpVpZY';
+const SPREADSHEET_ID = '1qaDJTFaJL4WsSYCAkiRC_tRZ0LUqgHuVUeacyKUW3Nc';
+
+// Each sheet is created automatically (with headers) the first time it is needed.
+const SHEETS = {
+  RSVP: {
+    name: 'RSVP',
+    headers: ['Timestamp', 'Full Name', 'Guests', 'Dietary Notes'],
+    toRow: function (p) {
+      return [new Date(), clean_(p.fullName), clean_(p.guests), clean_(p.dietaryNotes)];
+    },
+  },
+  WISH: {
+    name: 'Wishes',
+    headers: ['Timestamp', 'Name', 'Message'],
+    toRow: function (p) {
+      return [new Date(), clean_(p.name), clean_(p.message)];
+    },
+  },
+};
 
 function doPost(e) {
+  const lock = LockService.getScriptLock();
   try {
     const payload = parsePayload_(e);
-    const sheetKey = String(payload.sheet || '').toUpperCase();
+    const config = SHEETS[String(payload.sheet || '').toUpperCase()];
 
-    if (sheetKey !== 'RSVP' && sheetKey !== 'WISH') {
+    if (!config) {
       return jsonResponse_({ ok: false, error: 'Invalid sheet. Use RSVP or WISH.' });
     }
 
+    lock.waitLock(10000);
     const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-    const sheet = getOrCreateSheet_(ss, sheetKey);
-
-    if (sheetKey === 'RSVP') {
-      ensureHeaders_(sheet, ['Timestamp', 'Full Name', 'Guests', 'Event', 'Dietary Notes']);
-      sheet.appendRow([
-        new Date(),
-        payload.fullName || '',
-        payload.guests || '',
-        payload.event || '',
-        payload.dietaryNotes || '',
-      ]);
-    } else {
-      ensureHeaders_(sheet, ['Timestamp', 'Name', 'Event', 'Message']);
-      sheet.appendRow([
-        new Date(),
-        payload.name || '',
-        payload.event || '',
-        payload.message || '',
-      ]);
-    }
+    const sheet = getOrCreateSheet_(ss, config);
+    sheet.appendRow(config.toRow(payload));
 
     return jsonResponse_({ ok: true });
   } catch (error) {
@@ -37,6 +39,8 @@ function doPost(e) {
       ok: false,
       error: String(error && error.message ? error.message : error),
     });
+  } finally {
+    lock.releaseLock();
   }
 }
 
@@ -45,6 +49,37 @@ function doGet() {
     ok: true,
     message: 'Wedding form endpoint is running.',
   });
+}
+
+// Run this once from the Apps Script editor to create both sheets and grant permissions.
+function setup() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  Object.keys(SHEETS).forEach(function (key) {
+    getOrCreateSheet_(ss, SHEETS[key]);
+  });
+}
+
+function getOrCreateSheet_(ss, config) {
+  let sheet = ss.getSheetByName(config.name);
+  if (!sheet) {
+    sheet = ss.insertSheet(config.name);
+  }
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(config.headers);
+    sheet.getRange(1, 1, 1, config.headers.length)
+      .setFontWeight('bold')
+      .setBackground('#f3e8e2');
+    sheet.setFrozenRows(1);
+    sheet.getRange('A:A').setNumberFormat('yyyy-mm-dd hh:mm:ss');
+    sheet.autoResizeColumns(1, config.headers.length);
+  }
+  return sheet;
+}
+
+// Prevent values starting with = + - @ being run as spreadsheet formulas.
+function clean_(value) {
+  const text = String(value == null ? '' : value).trim();
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
 }
 
 function parsePayload_(e) {
@@ -88,20 +123,6 @@ function parseQueryString_(query) {
   }
 
   return out;
-}
-
-function getOrCreateSheet_(ss, name) {
-  let sheet = ss.getSheetByName(name);
-  if (!sheet) {
-    sheet = ss.insertSheet(name);
-  }
-  return sheet;
-}
-
-function ensureHeaders_(sheet, headers) {
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(headers);
-  }
 }
 
 function jsonResponse_(data) {

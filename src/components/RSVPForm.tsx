@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle, Loader2, Heart, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
+import { GOOGLE_SCRIPT_URL } from '../config';
+
+const RSVP_CONTACTS = [
+  { name: 'Malith', phone: '+94740885543', display: '074 088 5543' },
+  { name: 'Hansi', phone: '+94740885664', display: '074 088 5664' },
+];
 
 interface RSVPFormProps {
   inviteeName?: string;
@@ -16,7 +22,6 @@ export const RSVPForm: React.FC<RSVPFormProps> = ({ inviteeName = '', eventName 
     dietaryNotes: '',
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const scriptUrl = "https://script.google.com/macros/s/AKfycbz8x8mlUoOB1dJzMTtI-wR1QEea6TciU40hejJ-4WObWDYJN7GOzqQiweArl6i2hidH0w/exec";
 
   useEffect(() => {
     if (inviteeName) {
@@ -36,7 +41,7 @@ export const RSVPForm: React.FC<RSVPFormProps> = ({ inviteeName = '', eventName 
       payload.append('guests', formData.guests);
       payload.append('dietaryNotes', formData.dietaryNotes);
 
-      await fetch(scriptUrl, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         body: payload,
@@ -89,7 +94,19 @@ export const RSVPForm: React.FC<RSVPFormProps> = ({ inviteeName = '', eventName 
             }
           </p>
 
-          <div className="w-12 h-[1px] bg-brand-lavender/50 mx-auto lg:mx-0" />
+          <div className="w-12 h-[1px] bg-brand-lavender/50 mx-auto lg:mx-0 mb-6" />
+
+          <div className="space-y-2 font-serif text-lg text-stone-600">
+            {RSVP_CONTACTS.map((contact) => (
+              <p key={contact.phone}>
+                <span className="text-stone-800">{contact.name}</span>
+                {' — '}
+                <a href={`tel:${contact.phone}`} className="text-brand-plum hover:text-brand-rose transition-colors">
+                  {contact.display}
+                </a>
+              </p>
+            ))}
+          </div>
         </div>
 
         {/* Right Side: Flowing Form */}

@@ -48,7 +48,7 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div>
                   <h4 className="font-sinhala text-2xl sm:text-3xl text-stone-800 group-hover:text-brand-plum transition-colors duration-500">
-                    දිනය: 2026 ඔක්තෝබර් 29
+                    දිනය: 2027 මාර්තු 12, සිකුරාදා
                   </h4>
                 </div>
               </div>
@@ -60,7 +60,7 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div>
                   <h4 className="font-sinhala text-2xl sm:text-3xl text-stone-800 leading-relaxed group-hover:text-brand-plum transition-colors duration-500">
-                    <span className="font-semibold text-stone-700">ස්ථානය:</span> The Epitome, <br className="hidden sm:block" /> Kurunegala
+                    <span className="font-semibold text-stone-700">ස්ථානය:</span> The River Edge Hotel, <br className="hidden sm:block" /> Kaduwela
                   </h4>
                 </div>
               </div>
@@ -72,7 +72,7 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div>
                   <h4 className="font-sinhala text-2xl sm:text-3xl text-stone-800 leading-relaxed group-hover:text-brand-plum transition-colors duration-500">
-                    <span className="font-semibold text-stone-700">වේලාව:</span> 9.00 AM - 4.00 PM
+                    <span className="font-semibold text-stone-700">වේලාව:</span> 9.30 AM - 4.00 PM
                   </h4>
                 </div>
               </div>
@@ -84,7 +84,7 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div>
                   <h4 className="font-sinhala text-2xl sm:text-3xl text-stone-800 leading-relaxed group-hover:text-brand-plum transition-colors duration-500">
-                    <span className="font-semibold text-stone-700">පෝරුවේ චාරිත්‍ර:</span> 10.00 AM
+                    <span className="font-semibold text-stone-700">පෝරුවේ චාරිත්‍ර:</span> 8.40 AM
                   </h4>
                 </div>
               </div>

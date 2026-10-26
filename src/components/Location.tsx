@@ -10,11 +10,11 @@ export const Location: React.FC<LocationProps> = ({ event = 'both' }) => {
   const venues = [
     {
       id: 'ceremony',
-      name: "The Epitome Hotel",
-      city: "Kurunegala, Sri Lanka",
+      name: "The River Edge Hotel",
+      city: "Kaduwela, Sri Lanka",
       quote: `"අපගේ ජීවිතයේ සුන්දරතම දිනය සැමරෙන ස්ථානය"`,
-      liveLocationUrl: "https://maps.app.goo.gl/H5gj3nYvdjNJU4y86",
-      imageUrl: "https://q-xx.bstatic.com/xdata/images/hotel/1200x630/479073392.jpg?k=0f268309279e9891f97c63561f9a78a566867cb6b6daa795053b29b6cdb3bd8c&o=",
+      liveLocationUrl: "https://www.google.com/maps/search/?api=1&query=The+River+Edge+Hotel+Kaduwela",
+      mapEmbedUrl: "https://maps.google.com/maps?q=The%20River%20Edge%20Hotel%20Kaduwela&z=15&output=embed",
       label: "The Venue"
     }
   ];
@@ -107,10 +107,11 @@ export const Location: React.FC<LocationProps> = ({ event = 'both' }) => {
                   {/* Image Placeholder Masking for premium feel */}
                   <div className="absolute inset-0 bg-brand-lavender/10 mix-blend-multiply pointer-events-none z-20 group-hover/map:opacity-0 transition-opacity duration-1000" />
                   
-                  <img
-                    src={venue.imageUrl}
-                    alt={`${venue.name} Location`}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-in-out group-hover/map:scale-105"
+                  <iframe
+                    src={venue.mapEmbedUrl}
+                    title={`${venue.name} Location`}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full border-0 pointer-events-none transition-transform duration-[2s] ease-in-out group-hover/map:scale-105"
                   />
 
                   {/* Decorative Location Pin Overlay */}
