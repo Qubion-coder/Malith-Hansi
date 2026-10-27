@@ -41,12 +41,12 @@ export const CoupleDetails: React.FC = () => {
           <div className="mb-4 flex flex-col items-center lg:items-end">
             <span className="text-brand-plum uppercase tracking-[0.4em] text-[10px] font-bold mb-3 block">The Groom</span>
             <h3 className="text-4xl sm:text-5xl font-names text-stone-800 mb-1 drop-shadow-sm">Malith</h3>
-            <h4 className="text-2xl sm:text-3xl font-sinhala text-stone-700 mb-3 drop-shadow-sm">මලිත් මඩපත</h4>
+            <h4 className="text-2xl sm:text-3xl font-sinhala text-stone-700 mb-3 drop-shadow-sm">මලිත් මඩපාත</h4>
             <p className="text-stone-500/90 font-sans text-xs sm:text-sm text-center lg:text-right">
               Son of Mr. & Mrs. Madapatha
             </p>
             <p className="text-stone-500/90 font-sinhala text-sm sm:text-base mt-2 text-center lg:text-right">
-              මඩපත මහතා සහ මහත්මියගේ<br/>
+              මඩපාත මහතා සහ මහත්මියගේ<br/>
               ආදරණීය පුත්,
             </p>
           </div>
