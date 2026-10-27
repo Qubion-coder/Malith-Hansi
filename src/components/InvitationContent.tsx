@@ -12,6 +12,7 @@ import { RSVPForm } from './RSVPForm';
 import { WishesSection } from './WishesSection';
 import { InviteeBanner } from './InviteeBanner';
 import { DeferredMount } from './DeferredMount';
+import { LilyCorners } from './LilyCorners';
 
 interface InvitationContentProps {
   active: boolean;
@@ -68,6 +69,7 @@ export function InvitationContent({
 
       <DeferredMount active={active} delay={120} minHeight="40vh">
         <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-blush via-white to-brand-blush relative overflow-hidden">
+          <LilyCorners />
           <CoupleDetails />
         </div>
       </DeferredMount>
@@ -110,6 +112,7 @@ export function InvitationContent({
 
       <DeferredMount active={active} delay={420} minHeight="30vh">
         <div className="py-24 sm:py-32 bg-brand-blush relative overflow-hidden">
+          <LilyCorners />
           <RSVPForm inviteeName={fullInviteeName} eventName={eventLabel} eventParam={eventParam} />
         </div>
       </DeferredMount>
