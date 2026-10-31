@@ -68,7 +68,7 @@ export function InvitationContent({
       )}
 
       <DeferredMount active={active} delay={120} minHeight="40vh">
-        <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-blush via-white to-brand-blush relative overflow-hidden">
+        <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-blush via-brand-petal to-brand-blush relative overflow-hidden">
           <LilyCorners />
           <CoupleDetails />
         </div>
@@ -77,13 +77,13 @@ export function InvitationContent({
 
 
       <DeferredMount active={active} delay={180} minHeight="40vh">
-        <div className="py-24 sm:py-32 bg-white relative overflow-hidden">
+        <div className="py-24 sm:py-32 bg-brand-petal relative overflow-hidden">
           <CeremonyDetails event={eventParam} />
         </div>
       </DeferredMount>
 
       <DeferredMount active={active} delay={240} minHeight="40vh">
-        <div className="pt-24 pb-12 sm:py-32 bg-gradient-to-b from-white via-brand-rose/30 to-brand-blush relative overflow-hidden">
+        <div className="pt-24 pb-12 sm:py-32 bg-gradient-to-b from-brand-petal via-brand-blush to-brand-blush relative overflow-hidden">
           <Location event={eventParam} />
         </div>
       </DeferredMount>
@@ -118,13 +118,13 @@ export function InvitationContent({
       </DeferredMount>
 
       <DeferredMount active={active} delay={480} minHeight="30vh">
-        <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-blush to-white relative mt-10 overflow-hidden">
+        <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-blush to-brand-petal relative mt-10 overflow-hidden">
           <WishesSection eventParam={eventParam} inviteeName={fullInviteeName} />
         </div>
       </DeferredMount>
 
       <DeferredMount active={active} delay={500} minHeight="40vh">
-        <div className="py-16 sm:py-24 bg-white relative overflow-hidden flex justify-center items-center px-4">
+        <div className="py-16 sm:py-24 bg-brand-petal relative overflow-hidden flex justify-center items-center px-4">
           <div className="w-full max-w-5xl rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(176,137,104,0.15)] border border-brand-lavender/30">
             <video 
               src="/Couple_saying_goodbye_202608130003%20(online-video-cutter.com).mp4"
@@ -139,7 +139,7 @@ export function InvitationContent({
       </DeferredMount>
 
       <DeferredMount active={active} delay={520}>
-        <footer className="py-12 bg-white border-t border-brand-lavender/20 text-center relative overflow-hidden mt-10">
+        <footer className="py-12 bg-brand-petal border-t border-brand-lavender/20 text-center relative overflow-hidden mt-10">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-lavender/10 blur-[80px] rounded-full pointer-events-none" />
           <Heart className="w-6 h-6 mx-auto mb-6 text-brand-plum fill-brand-lavender/20" />
           <p className="font-names text-4xl sm:text-5xl text-stone-800 mb-1">Malith & Hansi</p>
